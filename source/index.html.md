@@ -209,18 +209,26 @@ Key | Description
         "covers": 3,
         "tables": [{
             "id": 1,
-            "name": "Table 1",
+            "name": "Table 01",
+            "max_covers": 4,
+            "activity": null,
+            "area": null,
+            "show_to_customer": "Y",
             "type": "rbar",
-            "tab": null,
-            "status": "",
+            "tab":null,
+            "status": "FREE",
             "meta": null
         },{
             "id": 2,
             "name": "Outside Bar 1",
+            "max_covers": 6,
+            "activity": null,
+            "area": null,
+            "show_to_customer": "Y",
             "type": "rbar",
-            "tab": null,
-             "status": "",
-             "meta": null
+            "tab":null,
+            "status": "FREE",
+            "meta": null
         }],
         "created_by": "API",
         "created_on": "2019-10-31",
@@ -268,29 +276,7 @@ Key | Example
     "date": "2019-10-17 15:23",
     "duration": 240,
     "covers": 3,
-    "tables": [{
-        "id": 1,
-        "name": "Table 01",
-        "max_covers": 0,
-        "activity": null,
-        "area": null,
-        "show_to_customer": "Y",
-        "type": "rbar",
-        "tab":null,
-        "status": "FREE",
-        "meta": null
-    },{
-        "id": 51,
-        "name": "Outside Table 02",
-        "max_covers": 0,
-        "activity": null,
-        "area": null,
-        "show_to_customer": "Y",
-        "type": "rbar",
-        "tab":null,
-        "status": "FREE",
-        "meta": null
-    }],    
+    "tables": [...],    
     "deposit_tab": 6,
     "tab": null,
     "tab_status": null,
@@ -304,15 +290,9 @@ Key | Example
     "deposit_spent": 5,
     "deposit_remaining": 15,
     "member": null,
-    "deposit_payments": [{
-        #
-    }],
-    "deposit_saved_balances": [{
-        #
-    }],
-    "deposit_links": [{
-        #
-    }]
+    "deposit_payments": [...],
+    "deposit_saved_balances": [...],
+    "deposit_links": [...]
 }
 ```
 
@@ -320,7 +300,7 @@ Fetches the full data for a single booking
 
 `GET https://mysite.rposcloud.com/api/bookings/{booking_id}`
 
-### Request Params
+### URL Params
 
 Key | Example 
 -------------- | --------------
@@ -331,7 +311,36 @@ Key | Example
 > Create Booking Response
 
 ```json
-#
+{
+    "success": true,
+    "message": "Booking successfully created",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2019-10-17 15:23",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 6,
+      "tab": null,
+      "tab_status": null,
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "Y",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 20,
+      "deposit_spent": 5,
+      "deposit_remaining": 15,
+      "member": null,
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
 ```
 
 Creates a new booking
@@ -342,9 +351,9 @@ Creates a new booking
 
 Key | Example 
 -------------- | --------------
-`name` | ***required*** ***string*** `John Doe`<br>The name associated with the booking
-`email` | ***required*** ***string*** `john@example.com`<br>The email address associated with the booking
-`date` | ***required*** ***string*** `2022-01-01 17:15`<br>The date and time of the booking (Format `YYYY-MM-DD HH:mm`)
+`name` | ***<span style="color:#dd4b39">required</span>*** ***string*** `John Doe`<br>The name associated with the booking
+`email` | ***<span style="color:#dd4b39">required</span>*** ***string*** `john@example.com`<br>The email address associated with the booking
+`date` | ***<span style="color:#dd4b39">required</span>*** ***string*** `2022-01-01 17:15`<br>The date and time of the booking (Format `YYYY-MM-DD HH:mm`)
 `phone` | ***string*** `+441234567890`<br>The telephone number associated with the booking
 `duration` | ***int*** `120`<br>The duration of the booking (in minutes)
 `covers` | ***int*** `6`<br>The number of covers for the booking
@@ -360,53 +369,154 @@ Key | Example
 > Update Booking Response
 
 ```json
-#
+{
+    "success": true,
+    "message": "Booking was successfully updated.",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2023-02-20 17:30",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 6,
+      "tab": null,
+      "tab_status": null,
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "Y",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 20,
+      "deposit_spent": 5,
+      "deposit_remaining": 15,
+      "member": null,
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
 ```
 
 Updates an existing booking
 
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}`
 
-```json
-# here
-```
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
 
 ### Request Params
 
 Key | Example 
 -------------- | --------------
-`booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
+`name` | ***<span style="color:#dd4b39">required</span>*** ***string*** `John Doe`<br>The name associated with the booking
+`email` | ***<span style="color:#dd4b39">required</span>*** ***string*** `john@example.com`<br>The email address associated with the booking
+`date` | ***<span style="color:#dd4b39">required</span>*** ***string*** `2022-01-01 17:15`<br>The date and time of the booking (Format `YYYY-MM-DD HH:mm`)
+`phone` | ***string*** `+441234567890`<br>The telephone number associated with the booking
+`duration` | ***int*** `120`<br>The duration of the booking (in minutes)
+`covers` | ***int*** `6`<br>The number of covers for the booking
+`tables` | ***object*** `[]`<br>See Tables object reference
+`notes` | ***string*** `Can we have a baby high chair`<br>Any optional notes attached to the booking, such as special requests or allergy notices
+`confirmed` | ***string*** `Y`<br> The status code of the booking <br> `R` - Requested <br> `Y` - Confirmed<br> `D` - Declined<br> `C` - Cancelled <br> ***note:*** *This will always be requested (R) unless permission is granted to allow auto confirmed bookings to be created* 
+
 
 ## Mark a booking as arrived
 
 > Mark booking as arrived Response
 
 ```json
-#
+{
+    "success": true,
+    "message": "Booking was successfully updated.",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2023-02-20 17:30",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 6,
+      "tab": 7,
+      "tab_status": "OPEN",
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "Y",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 20,
+      "deposit_spent": 5,
+      "deposit_remaining": 15,
+      "member": null,
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
 ```
 
 Marks a booking as arrived.
 
 This will take an existing booking and its deposit and transfer the deposit amount across to a new open tab at the venue.
 
+*Note*: `tab` column will be populated. `tab_status` will be `OPEN`. Tab will appear on the EPOS pre loaded with the deposit, and can now have items added to it usiong the add-item API call.
+
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}/arrival`
 
-```json
-# here
-```
-
-### Request Params
+### URL Params
 
 Key | Example 
 -------------- | --------------
 `booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
+
+<aside class="notice">
+Only bookings that do not have a linked <code>tab</code> can be marked as arrived
+</aside>
 
 ## Mark a booking as departed
 
 > Mark booking as departed Response
 
 ```json
-#
+{
+    "success": true,
+    "message": "Booking for John Doe [bf3a4974-f0e9-11e9-86c3-080027d0eccd] was marked as departed",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2023-02-20 17:30",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 6,
+      "tab": 7,
+      "tab_status": "SETTLED",
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "Y",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 20,
+      "deposit_spent": 5,
+      "deposit_remaining": 15,
+      "member": null,
+      "tab_data": [...],
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
 ```
 
 Marks a booking as departed at the end of the customers session.
@@ -415,29 +525,58 @@ This will perform a check that the tab associated with a booking is settled and 
 
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}/departure`
 
-```json
-# here
-```
-
-### Request Params
+### URL Params
 
 Key | Example 
 -------------- | --------------
 `booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
 
-## Mark a booking as cancelled
+<aside class="notice">
+Only bookings that have a linked <code>tab</code> marked as <code>SETTLED</code> can be marked as departed
+</aside>
+
+<!-- ## Mark a booking as cancelled
 
 > Mark booking as cancelled Response
 
 ```json
-#
+{
+    "success": true,
+    "message": "Booking was successfully updated.",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2023-02-20 17:30",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 6,
+      "tab": null,
+      "tab_status": null,
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "C",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 20,
+      "deposit_spent": 5,
+      "deposit_remaining": 15,
+      "member": null,
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
 ```
 
 Cancels a booking and sends an email to the customer
 
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}/cancel`
 
-### Request Params
+### URL Params
 
 Key | Example 
 -------------- | --------------
@@ -454,40 +593,229 @@ Key | Example
 Declines a booking request and sends an email to the customer
 
 <aside class="notice">
-Only booking requests can be declined
+Only booking requests (<code>"confirmed": "R"</code>) can be declined
 </aside>
 
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}/decline`
 
-### Request Params
+Key | Example 
+-------------- | --------------
+`name` | ***<span style="color:#dd4b39">required</span>*** ***string*** `John Doe`<br>The name associated with the booking
+`email` | ***<span style="color:#dd4b39">required</span>*** ***string*** `john@example.com`<br>The email address associated with the booking
+`date` | ***<span style="color:#dd4b39">required</span>*** ***string*** `2022-01-01 17:15`<br>The date and time of the booking (Format `YYYY-MM-DD HH:mm`)
+
+### URL Params
 
 Key | Example 
 -------------- | --------------
-`booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
+`booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking -->
 
 ## Add a deposit to an existing booking
+
+> Add a deposit to an existing booking Response
+
+```json
+{
+    "success": true,
+    "message": "Successfully added deposit of £25.00 to John doe [bf3a4974-f0e9-11e9-86c3-080027d0eccd]",
+    "data": {
+      "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+      "name": "John doe",
+      "email": "john@example.com",
+      "phone": "07891234567",
+      "date": "2023-02-20 17:30",
+      "duration": 240,
+      "covers": 3,
+      "tables": [...],    
+      "deposit_tab": 7,
+      "tab": null,
+      "tab_status": null,
+      "created_by": "John Manager",
+      "created_on": "2019-10-17 15:23:53",
+      "notes": "Allergic to eggs",
+      "confirmed": "Y",
+      "updated_by": "Jane FOH",
+      "updated_on": "2019-10-17 15:23:53",
+      "deposit_amount": 45,
+      "deposit_spent": 5,
+      "deposit_remaining": 40,
+      "member": null,
+      "deposit_payments": [...],
+      "deposit_saved_balances": [...],
+      "deposit_links": [...]
+    }
+}
+```
 
 Adds a deposit line to an existing booking
 
 `PUT https://mysite.rposcloud.com/api/bookings/{booking_id}/add-deposit`
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
+### URL Params
 
-> Make sure to replace `meowmeowmeow` with your API key.
+Key | Example 
+-------------- | --------------
+`booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Key | Example 
+-------------- | --------------
+`deposit_amount` | ***<span style="color:#dd4b39">required</span>*** ***string*** `25`<br>The amount in (£/$/€) of the deposit to be added
+`deposit_type` | ***<span style="color:#dd4b39">required</span>*** ***string*** `Cash`<br> Must be a valid credit line type
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Only bookings that have not been yet been marked as arrived can have a deposit added to them
 </aside>
+
+# Tables
+
+## The Table Object
+
+### Attributes
+
+> The Table Object
+
+```json
+{
+    "id": 1,
+    "name": "Table 01",
+    "max_covers": 4,
+    "activity": null,
+    "area": null,
+    "sort": 0,
+    "show_to_customer": "Y",
+    "type": "rbar",
+    "tab": null,
+    "status": "",
+    "meta": null
+}
+```
+
+Key | Description 
+-------------- | --------------
+`id` | ***string*** The ID of the table
+`name` | ***string*** The name associated of the table
+`max_covers` | ***string*** The maximum number of customers that can be sat at the table
+`activity` | ***object*** object See Activity object reference
+`area` | ***object*** object See Area object reference
+`sort` | ***integer*** The sorting index when displaying the tables in a list
+`show_to_customer` | ***string*** <code>Y/N</code> Whether the table is visible on customer facing apps
+
+### Extra Attributes (not available on All Tables call)
+
+Key | Description 
+-------------- | --------------
+`type` | ***enum*** Whether the table is a regular table or is designed to be used for PourTab or TableTab
+`tab` | ***integer*** The ID of the tab currently linked to the table
+`status` | ***enum*** The status of the table: <code>FREE/IN-USE</code>
+`meta` | ***json*** Any additional information about the table
+
+## All Tables
+
+```json
+{
+    "success": true,
+    "data": [{
+      "id": 1,
+      "name": "Table 01",
+      "max_covers": 4,
+      "activity": null,
+      "area": null,
+      "sort": 0,
+      "show_to_customer": "Y",
+  },{
+      "id": 2,
+      "name": "Table 02",
+      "max_covers": 6,
+      "activity": null,
+      "area": null,
+      "sort": 0,
+      "show_to_customer": "Y",
+  }]
+}
+```
+
+This endpoint retrieves all tables
+
+`GET https://mysite.rposcloud.com/api/table`
+
+## Single Table
+
+Fetches the full data for a single table
+
+`GET https://mysite.rposcloud.com/api/table/{table_id}`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`table_id` | `1` <br>The ID of the table
+
+## Create a Table
+
+Creates a new table
+
+`POST https://mysite.rposcloud.com/api/table`
+
+## Update a Table
+
+Updates an existing table
+
+`PUT https://mysite.rposcloud.com/api/table/{table_id}`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`table_id` | `1` <br>The ID of the table
+
+## Delete a Table
+
+Deletes a table
+
+`DELETE https://mysite.rposcloud.com/api/table/{table_id}`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`table_id` | `1` <br>The ID of the table
+
+# Tabs
+
+## The Tab Object
+
+## Single Tab
+
+## Open a new Tab
+
+## Settle a Tab
+
+## Close a Tab
+
+## Unlink a Tab
+
+## Add Item To Tab
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Kittens
 
