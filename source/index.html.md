@@ -14,6 +14,7 @@ toc_footers:
 
 includes:
   - areas
+  - availability
   - bookings
   - groups
   - members
