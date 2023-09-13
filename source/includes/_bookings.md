@@ -14,8 +14,11 @@
   "email": "john@example.com",
   "date": "2019-12-24 13:30",
   "duration": 360,
-  "tables": [],
   "covers": 6,
+  "linked_member_id": null,
+  "linked_contact_id": null,
+  "marketing_opt_in": 1,
+  "tables": [...],
   "deposit_tab": 7,
   "tab":null,
   "tab_status": null,
@@ -25,10 +28,14 @@
   "updated_on": "2019-10-20",
   "notes": "allergic to shellfish",
   "confirmed": "Y",
-  "member": null,
   "deposit_amount": 100,
   "deposit_spent": 9.99,
   "deposit_remaining": 90.01,
+  "member": {...},
+  "deposit_payments": [],
+  "tab_saved_balances": [],
+  "deposit_saved_balances": [],
+  "deposit_links": []
 }
 ```
 
@@ -41,7 +48,13 @@ Key | Description
 `date` | ***string*** The date and time of the booking (Format `YYYY-MM-DD HH:mm`)
 `duration` | ***int*** The duration of the booking (in minutes)
 `covers` | ***int*** The number of covers for the booking
-`tables` | ***object*** See Tables object reference
+`linked_member_id` | ***string*** The member ID that the booking is linked to
+`linked_contact_id` | ***string*** The contact ID that the booking is linked to
+`marketing_opt_in` | ***bool*** `1/0` Whether or not the person has given permission to be contacted via email for marketing purposes
+`tables` | ***array*** [See the table object](#the-table-object)
+`deposit_tab` | ***int*** the ID of the tab containing the deposit
+`tab` | ***int*** the ID of the tab once booking has arrived
+`tab_status` | ***int*** The status of the Tab (after marking as arrived) <br> `OPEN` - Tab is open/active  <br> `Closed` -Tab is closed <br> `SETTLED` - Tab is settled at £0
 `created_by` | ***string*** The user who created the booking
 `created_on` | ***date*** The date at which the booking was created
 `notes` | ***string*** Any optional notes attached to the booking, such as special requests or allergy notices
@@ -51,15 +64,19 @@ Key | Description
 
 Key | Description 
 -------------- | --------------
-`deposit_tab` | ***int*** The ID of the Deposit Tab <br> ***note:*** *This is not available on the All Bookings endpoint*
-`tab` | ***int*** The ID of the Tab (after marking as arrived) <br> ***note:*** *This is not available on the All Bookings endpoint*
-`tab_status` | ***int*** The status of the Tab (after marking as arrived) <br> `OPEN` - Tab is open/active  <br> `Closed` -Tab is closed <br> `SETTLED` - Tab is settled at £0 <br> ***note:*** *This is not available on the All Bookings endpoint*
+`updated_by` | ***string*** The user who created the booking
+`updated_on` | ***date*** The date at which the booking was created
 `deposit_amount` | ***float*** The total amount of deposit for the booking <br> ***note:*** *This is not available on the All Bookings endpoint*
 `deposit_spent` | ***float*** The total amount of deposit spent on the booking tab <br> ***note:*** *This is not available on the All Bookings endpoint*
 `deposit_remaining` | ***float*** The total amount of deposit remaining on the booking tab <br> ***note:*** *This is not available on the All Bookings endpoint*
-`member` | ***string*** The ID of the member if linked to the booking <br> ***note:*** *This is not available on the All Bookings endpoint*
+`member` | ***object*** [See the member object](#the-member-object) <br> ***note:*** *This is not available on the All Bookings endpoint*
+`deposit_payments` | ***array*** See the ordered item object (Coming soon)<br> ***note:*** *This is not available on the All Bookings endpoint*
+`tab_saved_balances` | ***array*** See the saved balance object (Coming soon)<br> ***note:*** *This is not available on the All Bookings endpoint*
+`deposit_saved_balances` | ***array*** See the saved balance object (Coming soon)<br> ***note:*** *This is not available on the All Bookings endpoint*`deposit_links` | ***array*** See the deposit links object (Coming soon)<br> ***note:*** *This is not available on the All Bookings endpoint*
 
 ## All Bookings
+
+> All Bookings Response
 
 ```json
 {
@@ -72,29 +89,13 @@ Key | Description
         "date": "2019-10-17 15:23",
         "duration": 240,
         "covers": 3,
-        "tables": [{
-            "id": 1,
-            "name": "Table 01",
-            "max_covers": 4,
-            "activity": null,
-            "area": null,
-            "show_to_customer": "Y",
-            "type": "rbar",
-            "tab":null,
-            "status": "FREE",
-            "meta": null
-        },{
-            "id": 2,
-            "name": "Outside Bar 1",
-            "max_covers": 6,
-            "activity": null,
-            "area": null,
-            "show_to_customer": "Y",
-            "type": "rbar",
-            "tab":null,
-            "status": "FREE",
-            "meta": null
-        }],
+        "linked_member_id": null,
+        "linked_contact_id": "b217a949-f49f-4d2a-bd9f-78d246b05174",
+        "marketing_opt_in": 1,
+        "tables": [...],
+        "deposit_tab": 18071,
+        "tab": 18072,
+        "tab_status": "OPEN",
         "created_by": "API",
         "created_on": "2019-10-31",
         "notes": "",
@@ -106,8 +107,14 @@ Key | Description
         "email": "team@tabology.com",
         "date": "2019-12-24 13:30",
         "duration": 360,
-        "tables": [],
         "covers": 6,
+        "linked_member_id": null,
+        "linked_contact_id": "b217a949-f49f-4d2a-bd9f-78d246b05174",
+        "marketing_opt_in": 1,
+        "tables": [...],
+        "deposit_tab": 18071,
+        "tab": 18072,
+        "tab_status": "OPEN",
         "created_by": "John Manager",
         "created_on": "2019-10-20",
         "notes": "allergic to shellfish",
@@ -141,6 +148,9 @@ Key | Example
     "date": "2019-10-17 15:23",
     "duration": 240,
     "covers": 3,
+    "linked_member_id": null,
+    "linked_contact_id": "b217a949-f49f-4d2a-bd9f-78d246b05174",
+    "marketing_opt_in": 1,
     "tables": [...],    
     "deposit_tab": 6,
     "tab": null,
@@ -154,7 +164,7 @@ Key | Example
     "deposit_amount": 20,
     "deposit_spent": 5,
     "deposit_remaining": 15,
-    "member": null,
+    "member": {...},
     "deposit_payments": [...],
     "deposit_saved_balances": [...],
     "deposit_links": [...]
@@ -222,6 +232,7 @@ Key | Example
 `phone` | ***string*** `+441234567890`<br>The telephone number associated with the booking
 `duration` | ***int*** `120`<br>The duration of the booking (in minutes)
 `covers` | ***int*** `6`<br>The number of covers for the booking
+`marketing_opt_in` | ***bool*** `1/0` Whether or not the person has given permission to be contacted via email for marketing purposes
 `tables` | ***object*** `[]`<br>See Tables object reference
 `notes` | ***string*** `Can we have a baby high chair`<br>Any optional notes attached to the booking, such as special requests or allergy notices
 `deposit_amount` | ***float*** `150.00`<br> Adds an initial deposit to the booking
@@ -286,6 +297,7 @@ Key | Example
 `phone` | ***string*** `+441234567890`<br>The telephone number associated with the booking
 `duration` | ***int*** `120`<br>The duration of the booking (in minutes)
 `covers` | ***int*** `6`<br>The number of covers for the booking
+`marketing_opt_in` | ***bool*** `1/0` Whether or not the person has given permission to be contacted via email for marketing purposes
 `tables` | ***object*** `[]`<br>See Tables object reference
 `notes` | ***string*** `Can we have a baby high chair`<br>Any optional notes attached to the booking, such as special requests or allergy notices
 `confirmed` | ***string*** `Y`<br> The status code of the booking <br> `R` - Requested <br> `Y` - Confirmed<br> `D` - Declined<br> `C` - Cancelled <br> `N` - No Show<br> ***note:*** *This will always be requested (R) unless permission is granted to allow auto confirmed bookings to be created* 
@@ -628,3 +640,62 @@ If using deposit links, the deposit can only be refunded once the initial paymen
 <aside class="warning">
 If using Stripe on Mobile Ordering. It WILL refund the payment on Stripe
 </aside>
+
+## Booking History for Email
+
+> Booking History for Email Response
+
+```json
+{
+    "success": true,
+    "data": [{
+        "id": "bf3a4974-f0e9-11e9-86c3-080027d0eccd",
+        "name": "Ian Berry",
+        "phone": "+441234567890",
+        "email": "team@tabology.com",
+        "date": "2019-10-17 15:23",
+        "duration": 240,
+        "covers": 3,
+        "linked_member_id": null,
+        "linked_contact_id": "b217a949-f49f-4d2a-bd9f-78d246b05174",
+        "marketing_opt_in": 1,
+        "tables": [...],
+        "deposit_tab": 18071,
+        "tab": 18072,
+        "tab_status": "OPEN",
+        "created_by": "API",
+        "created_on": "2019-10-31",
+        "notes": "",
+        "confirmed": "Y"
+    },{
+        "id": "bf3a4974-f0e9-11e9-86c3-080027d0dffe",
+        "name": "Ian Berry",
+        "phone": "+441234567890",
+        "email": "team@tabology.com",
+        "date": "2019-12-24 13:30",
+        "duration": 360,
+        "covers": 6,
+        "linked_member_id": null,
+        "linked_contact_id": "b217a949-f49f-4d2a-bd9f-78d246b05174",
+        "marketing_opt_in": 1,
+        "tables": [...],
+        "deposit_tab": 18071,
+        "tab": 18072,
+        "tab_status": "OPEN",
+        "created_by": "John Manager",
+        "created_on": "2019-10-20",
+        "notes": "allergic to shellfish",
+        "confirmed": "Y"
+    }]
+}
+```
+
+Shows a list of previous bookings for a given email address
+
+`PUT https://mysite.rposcloud.com/api/bookings/{email}/history`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`email` | `team@tabology.com` <br>The email address to search for the previous bookings

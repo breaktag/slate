@@ -12,8 +12,8 @@
     "id": 1,
     "name": "Table 01",
     "max_covers": 4,
-    "activity": null,
-    "area": null,
+    "area": null || {...},
+    "activities": [...],
     "sort": 0,
     "show_to_customer": "Y",
     "type": "rbar",
@@ -28,8 +28,6 @@ Key | Description
 `id` | ***string*** The ID of the table
 `name` | ***string*** The name associated of the table
 `max_covers` | ***string*** The maximum number of customers that can be sat at the table
-`activity` | ***object*** object See Activity object reference
-`area` | ***object*** object See Area object reference
 `sort` | ***integer*** The sorting index when displaying the tables in a list
 `show_to_customer` | ***string*** <code>Y/N</code> Whether the table is visible on customer facing apps
 
@@ -37,8 +35,10 @@ Key | Description
 
 Key | Description 
 -------------- | --------------
+`area` | ***object*** See [See Area object reference](#area-object).
+`activities` | ***array*** See [See Activity object reference](#activity-object).
 `type` | ***enum*** Whether the table is a regular table or is designed to be used for PourTab or TableTab
-`tab` | ***integer*** The ID of the tab currently linked to the table
+`tab` | ***integer|null*** The ID of the tab currently linked to the table
 `status` | ***enum*** The status of the table: <code>FREE/IN-USE</code>
 `meta` | ***json*** Any additional information about the table
 
@@ -53,7 +53,7 @@ Key | Description
       "id": 1,
       "name": "Table 01",
       "max_covers": 4,
-      "activity": null,
+      "activities": [],
       "area": null,
       "sort": 0,
       "show_to_customer": "Y",
@@ -61,7 +61,7 @@ Key | Description
       "id": 2,
       "name": "Table 02",
       "max_covers": 6,
-      "activity": null,
+      "activities": [],
       "area": null,
       "sort": 0,
       "show_to_customer": "Y",
@@ -84,7 +84,6 @@ This endpoint retrieves all tables
       "id": 1,
       "name": "Table 01",
       "max_covers": 4,
-      "activity": null,
       "area": null,
       "sort": 0,
       "show_to_customer": "Y",
@@ -118,7 +117,6 @@ Key | Example
       "id": 1,
       "name": "Table 01",
       "max_covers": 4,
-      "activity": null,
       "area": null,
       "sort": 0,
       "show_to_customer": "Y",
@@ -156,7 +154,6 @@ Key | Example
       "id": 1,
       "name": "Table 01",
       "max_covers": 4,
-      "activity": null,
       "area": null,
       "sort": 0,
       "show_to_customer": "Y",
