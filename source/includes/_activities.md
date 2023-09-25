@@ -214,3 +214,135 @@ Deletes a Activity
 Key | Example 
 -------------- | --------------
 `activity_id` | `1` <br>The ID of the Activity
+
+## Check Valid Booking Type(s) (Activities)
+
+> Check Valid Booking Type(s) Response
+
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 16,
+            "name": "Breakfast",
+            "service_time_id": "st_3781abaf-4969-4678-b8d6-7981e631b188",
+            "show_to_customer": "Y",
+            "sort": 0,
+            "active": "Y",
+            "$isDisabled": true,
+            "service_times_json": [
+                {
+                    "dayOfWeek": "Wednesday",
+                    "opens": "09:00",
+                    "closes": "11:30"
+                },
+                {
+                    "dayOfWeek": "Thursday",
+                    "opens": "09:00",
+                    "closes": "11:30"
+                },
+                {
+                    "dayOfWeek": "Friday",
+                    "opens": "09:00",
+                    "closes": "11:30"
+                },
+                {
+                    "dayOfWeek": "Friday",
+                    "opens": "21:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Saturday",
+                    "opens": "09:00",
+                    "closes": "11:30"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "name": "Bowling",
+            "service_time_id": "st_d83d8516-8c22-4d99-b990-18468d3ff256",
+            "show_to_customer": "Y",
+            "sort": 0,
+            "active": "Y",
+            "$isDisabled": false,
+            "service_times_json": [
+                {
+                    "dayOfWeek": "Monday",
+                    "opens": "09:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Tuesday",
+                    "opens": "09:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Wednesday",
+                    "opens": "19:00",
+                    "closes": "23:00"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "name": "Lunch",
+            "service_time_id": null,
+            "show_to_customer": "Y",
+            "sort": 1,
+            "active": "Y",
+            "$isDisabled": false,
+            "service_times_json": null
+        },
+        {
+            "id": 14,
+            "name": "Dinner",
+            "service_time_id": "st_f654ca18-49bf-42d7-828e-3dbd644be9dd",
+            "show_to_customer": "Y",
+            "sort": 2,
+            "active": "Y",
+            "$isDisabled": true,
+            "service_times_json": [
+                {
+                    "dayOfWeek": "Monday",
+                    "opens": "17:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Tuesday",
+                    "opens": "17:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Wednesday",
+                    "opens": "17:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Thursday",
+                    "opens": "17:00",
+                    "closes": "23:00"
+                },
+                {
+                    "dayOfWeek": "Friday",
+                    "opens": "17:00",
+                    "closes": "23:00"
+                }
+            ]
+        }
+    ]
+}
+```
+
+Fetches all the booking types with a `$isDisabled` boolean flag, denoting whether it is available for the given date time in the request.
+
+The `$isDisabled` is not computed through looking at existing bookings and table availability. It is computed by looking at the service times which are linked to the booking type (activity). A booking type (activity) with no service times is available at all times.
+
+`POST https://mysite.rposcloud.com/api/activity/check-valid`
+
+### Request Params
+
+Key | Example 
+-------------- | --------------
+`datetime` | ***<span style="color:#dd4b39">required</span>*** ***string*** `2023-09-25 11:30:00`<br> The datetime to check the availability for

@@ -88,4 +88,5 @@ Key | Example
 `date` | ***<span style="color:#dd4b39">required</span>*** ***string*** `2023-06-30 13:00`<br>The date and time to check availability for (YYYY-MM-DD HH:mm)
 `duration` | ***<span style="color:#dd4b39">required</span>*** ***integer*** `120`<br>The amount of time in minutes of the booking
 `covers` | ***<span style="color:#dd4b39">required</span>*** ***integer*** `4`<br>The number of covers/seats required for the booking
+`activity_id` | ***integer*** `19`<br>The ID of the booking type (activity) in which to filter the tables by.
 `ignoreIds` | ***array*** `['33b48075-def5-46b6-9162-960b149389c2']`<br> A list of booking ids to ignore when performing the request. This is useful for when you are wanting to check the availability for the booking you are on. It will exclude the current booking from the availability check
