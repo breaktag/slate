@@ -17,19 +17,21 @@
   "phone": "+44123456789" ,
   "dob": "1988-04-18",
   "additional_info": [],
-  "active": "Y",
+  "groups": [],
+  "active": "Y|N",
   "created_at": "2023-03-15 09:15:00",
   "disabled_at": null,
   "expiry_date": "2024-04-27",
   "last_used": "2023-03-15 09:15:00",
   "last_used_humans": "2 months ago",
   "last_updated": "2023-03-15 09:15:00",
-  "terms_agreed": null,
   "marketing_permission_given": 1,
   "promotions": [],
   "loyalty_points_balance": 0,
   "loyalty_transactions": [],
-  "balance": "99.99"
+  "balance": "99.99" || null,
+  "is_prepay": true || false,
+  "has_open_tab": 123 || null
 }
 ```
 
@@ -40,25 +42,31 @@ Key | Description
 `name` | ***string*** The name associated with the member
 `avatar` | ***string*** The path to the users avatar image
 `email` | ***string*** The email address associated with the member
+`phone` | ***string*** The contact number of the member
 `dob` | ***string*** The date of birth of the member (Format `YYYY-MM-DD`)
 `additional_info` | ***object*** Array of additional information about the member (Gender, Driving license number etc)
 `groups` | ***object*** List of groups the member is assigned to (See Groups section)
 `active` | ***enum*** `Y/N`<br> Whether the member is activated or not (Yes - Activated/No - Deactivated)
 `created_at` | ***date*** The date at which the member was created
 `disabled_at` | ***date*** The date at which the member was last disabled. This is usually counted from when their most recent saved balance entry was
+`expiry_date` | ***date*** The date at which the member was or will be automatically deactivated
 `last_used` | ***date*** The date at which the member last used their account
 `last_used_humans` | ***string*** The human friendly string describing the last used date
-`terms_agreed` | ***date*** The date at which the member verified their account
 `marketing_permission_given` | ***bool*** `1/0` Whether or not the member has given permission to be contacted via email for marketing purposes
 `promotions` | ***object*** An array of the members eligible promotions
 `loyalty_points_balance` | ***int*** The number of loyalty points the member has accumulated
 `loyalty_points_transactions` | ***object*** The history of loyalty transactions for the member
+`balance` | ***string|null*** The current balance (credit) of the member if they are a pre pay member. Will be `null` if not using balances.
+`is_prepay` | ***boolean*** A simple switch to show whether the member is a pre pay member or not
+`has_open_tab` | ***int|null*** returns the `tab_id` of the active tab or null if the member doesnt have an active tab open
 
 ## All Members
 
 > All Members response
 
 ```json
+// Some fields from The Member Object are omitted from the All Members endpoint
+
 {
     "success": true,
     "data": [{
@@ -70,7 +78,6 @@ Key | Description
 		"email": "john@example.com",
 		"phone": "+44123456789",
 		"dob": "1988-04-18",
-		"additional_info": [],
 		"active": "Y",
 		"created_at": "2023-03-15 09:15:00",
 		"disabled_at": null,
@@ -78,12 +85,7 @@ Key | Description
 		"last_used": "2023-03-15 09:15:00",
 		"last_used_humans": "2 months ago",
 		"last_updated": "2023-03-15 09:15:00",
-		"terms_agreed": null,
-		"marketing_permission_given": 1,
-		"promotions": [],
-		"loyalty_points_balance": 0,
-		"loyalty_transactions": [],
-		"balance": "99.99"
+		"marketing_permission_given": 1
 	},{
 		"id": "97b1e7ec-fd18-4f0c-9f4a-fa55a5979375",
 		"rfid_id": "CN97b1e7ec-fd18-4f0c-9f4a-fa55a5979375",
@@ -92,7 +94,6 @@ Key | Description
 		"nickname": "Jane",
 		"email": "jane@example.com",
 		"dob": "1989-04-18",
-		"additional_info": [],
 		"active": "Y",
 		"created_at": "2023-03-14 09:15:00",
 		"disabled_at": null,
@@ -100,15 +101,14 @@ Key | Description
 		"last_used": "2023-03-14 09:15:00",
 		"last_used_humans": "2 months ago",
 		"last_updated": "2023-03-14 09:15:00",
-		"terms_agreed": null,
-		"marketing_permission_given": 1,
-		"promotions": [],
-		"loyalty_points_balance": 0,
-		"loyalty_transactions": [],
-		"balance": "99.99"
+		"marketing_permission_given": 1
 	}]
 }
 ```
+
+<aside class="notice">
+Some fields from The Member Object are omitted from the All Members endpoint
+</aside>
 
 This endpoint retrieves All Members
 
@@ -138,12 +138,13 @@ This endpoint retrieves All Members
 		"last_used": "2023-03-15 09:15:00",
 		"last_used_humans": "2 months ago",
 		"last_updated": "2023-03-15 09:15:00",
-		"terms_agreed": null,
 		"marketing_permission_given": 1,
 		"promotions": [],
 		"loyalty_points_balance": 0,
 		"loyalty_transactions": [],
-		"balance": "99.99"
+		"balance": "99.99" || null,
+		"is_prepay": true | false,
+		"has_open_tab": 123
 	}
 }
 ```
@@ -174,8 +175,6 @@ Key | Example
 
 > Create a Member Response
 
-> Single Member Response
-
 ```json
 {
     "success": true,
@@ -196,12 +195,13 @@ Key | Example
 		"last_used": "2023-03-15 09:15:00",
 		"last_used_humans": "2 months ago",
 		"last_updated": "2023-03-15 09:15:00",
-		"terms_agreed": null,
 		"marketing_permission_given": 1,
 		"promotions": [],
 		"loyalty_points_balance": 0,
 		"loyalty_transactions": [],
-		"balance": "99.99"
+		"balance": "99.99" || null,
+		"is_prepay": true | false,
+		"has_open_tab": 123
 	}
 }
 ```
@@ -215,7 +215,8 @@ Creates a new Member
 Key | Example 
 -------------- | --------------
 `name` | ***<span style="color:#dd4b39">required</span>*** ***string*** `John Doe`<br>The name of the Member
-`email` | ***<span style="color:#dd4b39">required</span>*** ***string*** `john@example.com`<br>The email address of the Member. The email address must be unique
+`email` | ***<span style="color:#dd4b39">required if passed</span>*** ***string*** `john@example.com`<br>The email address of the Member. Email is optional, however if it is passed, then it must be unique
+`rfid_id` | ***<span style="color:#dd4b39">required if passed</span>*** ***string*** `CN12345678`<br>Serial number of an RFID Card. rfid_id is optional, however if it is passed, then it must be unique.
 `dob` | ***date*** `YYYY-MM-DD`<br> The members date of birth. Must match format
 `phone` | ***string*** `+441234567890`<br>The phone number of the Member
 `nickname` | ***string*** `Johnny`<br>The nickname of the Member
@@ -226,6 +227,7 @@ Key | Example
 `loyalty_scheme_id` | ***string*** `ls_86df7031-28f4-4974-81fd-231c8f1f1dad`<br>An ID of a valid Loyalty Scheme
 `password` | ***string*** If using member registration then a password can be set
 `password_confirmation` | ***string*** If using member registration then a password can be set and must be confirmed and match the same as the above. This is  ***<span style="color:#dd4b39">required</span>*** if specifying a password
+`is_prepay` | ***enum*** `Y/N`<br> Whether the member is a prepay member or not (Yes/No)
 
 ## Update a Member
 
@@ -251,6 +253,7 @@ Key | Example
 Key | Example 
 -------------- | --------------
 `name` | ***<span style="color:#dd4b39">required</span>*** ***string*** `John Doe`<br>The name of the Member
+`rfid_id` | ***<span style="color:#dd4b39">required if passed</span>*** ***string*** `CN12345678`<br>Serial number of an RFID Card. rfid_id is optional, however if it is passed, then it must be unique.
 `dob` | ***date*** `YYYY-MM-DD`<br> The members date of birth. Must match format
 `phone` | ***string*** `+441234567890`<br>The phone number of the Member
 `nickname` | ***string*** `Johnny`<br>The nickname of the Member

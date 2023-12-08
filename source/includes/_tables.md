@@ -205,3 +205,44 @@ Deletes a table
 Key | Example 
 -------------- | --------------
 `table_id` | `1` <br>The ID of the table
+
+## Get Linked Tab for Table
+
+> Get Linked Tab for Table Response
+
+```json
+{
+  "id":18757,
+  "rfid_id":"G1696596494-82397",
+  "external_tab_id":"IM0UFSSDW6",
+  "member_id":"0",
+  "name":"Table 01: John Doe",
+  "covers":2,
+  "tab_type":"Post Pay",
+  "status":"OPEN",
+  "time_opened":"2023-10-06 13:48:14",
+  "time_closed":null,
+  "time_paid":null,
+  "opened_by":"Phil Neale",
+  "closed_by":"",
+  "paid_by":"",
+  "grand_total":13.86,
+  "sales_tax":-2.31,
+  // See The Ordered Item Object for the below relationships (To do)
+  "items":[...],
+  "payments":[...],
+  "discounts":[...],
+  "promotions":[...],
+  "voidedItems":[...]
+}
+```
+
+Returns a Tab object for the tab which is currently linked to the table
+
+`GET https://mysite.rposcloud.com/api/table/{table_id}/linked-tab`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`table_id` | `1` <br>The ID of the table
