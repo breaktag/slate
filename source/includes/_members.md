@@ -292,7 +292,8 @@ Key | Example
 
 Key | Example 
 -------------- | --------------
-`image` | ***file*** ***<span style="color:#dd4b39">required</span>*** An uploaded file to be used for the image
+`image` | ***string*** ***<span style="color:#dd4b39">required</span>*** `https://example.com/avatar.png`<br>The avatar image url for the Member
+
 
 
 ## Upload & Update Member Avatar
@@ -328,4 +329,4 @@ Key | Example
 
 Key | Example 
 -------------- | --------------
-`image` | ***string*** ***<span style="color:#dd4b39">required</span>*** `https://example.com/avatar.png`<br>The avatar image url for the Member
+`image` | ***file*** ***<span style="color:#dd4b39">required</span>*** An uploaded file to be used for the image
