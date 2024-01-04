@@ -292,4 +292,40 @@ Key | Example
 
 Key | Example 
 -------------- | --------------
+`image` | ***file*** ***<span style="color:#dd4b39">required</span>*** An uploaded file to be used for the image
+
+
+## Upload & Update Member Avatar
+
+> Upload & Update Member Avatar Response
+
+
+```json
+{
+    "success": true,
+    "message": "Member avatar was updated",
+    "data": {
+      ...MemberObject
+    }
+}
+```
+
+Will upload a supplied field to cloud storage, then set this as the members avatar
+
+<aside class="notice">
+You must use <code>Content-Type: multipart/form-data</code> header when sending the image file to this endpoint
+</aside>
+
+`POST https://mysite.rposcloud.com/api/member/{member_id}/upload-avatar`
+
+### URL Params
+
+Key | Example 
+-------------- | --------------
+`member_id` | `a7557613-12aa-472c-b341-9c951c673c99` <br>The UUID of the Member
+
+### Request Params
+
+Key | Example 
+-------------- | --------------
 `image` | ***string*** ***<span style="color:#dd4b39">required</span>*** `https://example.com/avatar.png`<br>The avatar image url for the Member
