@@ -31,7 +31,8 @@
   "loyalty_transactions": [],
   "balance": "99.99" || null,
   "is_prepay": true || false,
-  "has_open_tab": 123 || null
+  "has_open_tab": 123 || null,
+  "contactInfoType": "M" || "C"
 }
 ```
 
@@ -59,6 +60,7 @@ Key | Description
 `balance` | ***string|null*** The current balance (credit) of the member if they are a pre pay member. Will be `null` if not using balances.
 `is_prepay` | ***boolean*** A simple switch to show whether the member is a pre pay member or not
 `has_open_tab` | ***int|null*** returns the `tab_id` of the active tab or null if the member doesnt have an active tab open
+`contactInfoType` | ***string*** The type of entity. `M` for Member and `C` for Contact
 
 ## All Members
 
@@ -121,7 +123,7 @@ This endpoint retrieves All Members
 ```json
 {
     "success": true,
-    "profile": {
+    "data": {
 		"id": "a7557613-12aa-472c-b341-9c951c673c99",
 		"rfid_id": "CNa7557613-12aa-472c-b341-9c951c673c99",
 		"name": "John Doe",
@@ -130,6 +132,7 @@ This endpoint retrieves All Members
 		"email": "john@example.com",
 		"phone": "+44123456789",
 		"dob": "1988-04-18",
+		"groups": [],
 		"additional_info": [],
 		"active": "Y",
 		"created_at": "2023-03-15 09:15:00",
@@ -145,6 +148,7 @@ This endpoint retrieves All Members
 		"balance": "99.99" || null,
 		"is_prepay": true | false,
 		"has_open_tab": 123
+		"contactInfoType": "M"
 	}
 }
 ```
@@ -178,7 +182,7 @@ Key | Example
 ```json
 {
     "success": true,
-    "profile": {
+    "data": {
 		"id": "a7557613-12aa-472c-b341-9c951c673c99",
 		"rfid_id": "CNa7557613-12aa-472c-b341-9c951c673c99",
 		"name": "John Doe",
@@ -201,7 +205,8 @@ Key | Example
 		"loyalty_transactions": [],
 		"balance": "99.99" || null,
 		"is_prepay": true | false,
-		"has_open_tab": 123
+		"has_open_tab": 123,
+		"contactInfoType": "M"
 	}
 }
 ```
