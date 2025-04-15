@@ -19,6 +19,8 @@ includes:
   - activities
   - groups
   - members
+  - loyalty
+  - reporting
   - tables
   - tabs
   - errors
@@ -40,7 +42,7 @@ Version | Description | Date
 -------------- | -------------- | --------------
 1.0 | Initial Release | 2023-02-15
 
-## Overview 
+## Overview
 
 The TabHub Public API is built around RESTful practices and designed to receive data via HTTPS requests. The following sections describe each action that is available and the information the system expects to receive in the request and the information that is returned in the response.
 
@@ -50,7 +52,7 @@ The OAuth2 password grant allows you to obtain an access token by using an email
 
 This document will also provide examples of each request and response in a JSON format.
 
-Responses from the TabHub API will include a suitable HTTP header such as 200, 404 or 401 for the header portion of the response. 
+Responses from the TabHub API will include a suitable HTTP header such as 200, 404 or 401 for the header portion of the response.
 
 You should never expose your Access Token, Refresh token, username or password to anyone or in any client-side web application.
 
@@ -134,11 +136,3 @@ $response = $client->request('GET', '/api/member', [
 ```
 
 When calling any API route, your application's API consumers should specify their **Access Token as a Bearer token** in the `Authorization` header of the request. You must also set the `Accept` header to use `application/json` For example, when using the Guzzle HTTP library:
-
-## Search Params
-
-To use the search params available for each request, append the `key`, `value` pairs as a query string to the Request URI
-
-e.g: `https://mysite.rposcloud.com/api/bookings?from=2022-01-01&to=2022-01-31`
-
-<%= partial "includes/tab_object.md.erb" %>
