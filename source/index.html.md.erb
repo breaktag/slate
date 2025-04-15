@@ -19,7 +19,6 @@ includes:
   - activities
   - groups
   - members
-  - loyalty
   - reporting
   - tables
   - tabs
@@ -112,6 +111,7 @@ return json_decode((string) $response->getBody(), true);
 ```
 
 Typically access tokens are only short lived for up to 15 days. Refresh tokens will expire after 30 days.
+
 If your access token expires, you will need to use the refresh token to generate a new one. The refresh token was provided when the original token was issued. In this example, we'll use the Guzzle HTTP library to refresh the access token:
 
 # API Resources
