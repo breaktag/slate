@@ -8,7 +8,7 @@ Returns a list of tips for a a given date range
 
 `GET https://mysite.rposcloud.com/api/reporting/tips`
 
-`GET https://mysite.rposcloud.com/api/reporting/tips?filters%5Bdate_range%5D%5Bfrom%5D=2024-10-17 05:00:00&filters%5Bdate_range%5D%5Bto%5D=2025-04-15 10:59:59&filters%5Bgrouping%5D=device_id`
+`GET https://mysite.rposcloud.com/api/reporting/tips?filters%5Bdate_range%5D%5Bfrom%5D=2024-10-17 05:00:00&filters%5Bdate_range%5D%5Bto%5D=2025-04-15 10:59:59`
 
 > Tips Report Example Filters
 
@@ -18,9 +18,7 @@ Returns a list of tips for a a given date range
     "date_range" => [
       "from" => "2024-10-17 05:00:00",
       "to" => "2025-04-15 10:59:59"
-    ],
-    "grouping" => "device_id" 
-    // Can be one of "device_id", "tab.paid_by", "tab.opened_by", "tab.closed_by", "tab.owner.username"
+    ]
   ]
 ]
 ```
@@ -163,7 +161,7 @@ Returns a list of service charges for a a given date range
 
 `GET https://mysite.rposcloud.com/api/reporting/service-charges`
 
-`GET https://mysite.rposcloud.com/api/reporting/service-charges?filters%5Bdate_range%5D%5Bfrom%5D=2024-10-17 05:00:00&filters%5Bdate_range%5D%5Bto%5D=2025-04-15 10:59:59&filters%5Bgrouping%5D=device_id`
+`GET https://mysite.rposcloud.com/api/reporting/service-charges?filters%5Bdate_range%5D%5Bfrom%5D=2024-10-17 05:00:00&filters%5Bdate_range%5D%5Bto%5D=2025-04-15 10:59:59`
 
 > Service Charges Report Example Filters
 
@@ -173,9 +171,7 @@ Returns a list of service charges for a a given date range
     "date_range" => [
       "from" => "2024-10-17 05:00:00",
       "to" => "2025-04-15 10:59:59"
-    ],
-    "grouping" => "device_id" 
-    // Can be one of "device_id", "tab.paid_by", "tab.opened_by", "tab.closed_by", "tab.owner.username"
+    ]
   ]
 ]
 ```
