@@ -469,6 +469,12 @@ Key | Example
 -------------- | --------------
 `booking_id` | `bf3a4974-f0e9-11e9-86c3-080027d0eccd` <br>The ID of the booking
 
+### Request Params
+
+Key | Example 
+-------------- | --------------
+`void_service_charge` | ***string*** <code>Y/N</code> Whether or not override the default service charge behaviour. <br> `Y` - Override <br> `N` - Use default behaviour
+
 <aside class="notice">
 Only bookings that do not have a linked <code>tab</code> can be marked as arrived
 </aside>

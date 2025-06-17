@@ -313,6 +313,12 @@ Key | Example
 
 ## Open a new Tab
 
+### Request Params
+
+Key | Example 
+-------------- | --------------
+`void_service_charge` | ***string*** <code>Y/N</code> Whether or not override the default service charge behaviour. <br> `Y` - Override <br> `N` - Use default behaviour
+
 ## Settle a Tab
 
 ## Close a Tab

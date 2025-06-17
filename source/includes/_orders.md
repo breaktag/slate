@@ -72,6 +72,29 @@ Individual Line Item Resources are not included in this response. To retrieve in
 
 `GET https://mysite.rposcloud.com/api/order/current`
 
+Key | Description 
+-------------- | --------------
+`root_category` ***enum*** - `WET`/`DRY`/`OTHER` The top level category that the item relates to
+`boolean_status` ***enum*** - `PREPARING`/`READY` whether the order is currently being prepared or is ready
+`sales_total` ***float*** -  Total value of sales for the order (gross)
+`original_total` ***float*** - Total value of sales for the order before any deductions such as promotions or discounts (gross)
+`cost_total` ***float*** - Total cost value of all the sales for the order
+`tax` ***string*** - Tax percentage that the sales on the order are subject to
+`net_sales` ***float*** -  Total value of sales for the order (net)
+`tax_amount` ***float*** -  Total tax amount to be paid for sales on the order
+`gross_profit` ***float*** - Total gross profit of all the sales on the order
+`gross_profit_percentage` ***string*** - Percentage gross profit for all the sales on the order
+`ordered_item_id` ***int*** - ordered item id of the first item on the order
+`order_id` ***int*** - The ID of the order
+`tab_id` ***int*** - The ID of the tab the order belongs to
+`status` ***enum*** - raw status of the order, more detailed than `boolean_status`
+`time_ordered` ***string*** - The time the order was placed
+`device_id` ***string*** - The device ID of the device the order was placed on
+`area_id` ***int*** - The ID of the area the order is linked to (via `table_id`)
+`area_name` ***string*** - The name of the area the order is linked to (via `table_id`)
+`table_id` ***int*** - The ID of the table the order is linked to
+`table_name` ***string*** - The name of the table the order is linked to
+
 
 ## Single Order
 
