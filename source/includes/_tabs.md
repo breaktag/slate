@@ -317,7 +317,7 @@ Key | Example
 
 Key | Example 
 -------------- | --------------
-`void_service_charge` | ***string*** <code>Y/N</code> Whether or not override the default service charge behaviour. <br> `Y` - Override <br> `N` - Use default behaviour
+`add_service_charge` | ***string*** <code>Y/N</code> Whether or not to add the default service charge behaviour. <br> `Y` - Default behaviour will occur <br> `N` - Service charge will be voided <br> ***note:*** *This will default to `Y` if not N*
 
 ## Settle a Tab
 
